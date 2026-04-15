@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BR LOG® – Condomínios Logísticos | Dourados e Campo Grande, MS</title>
+  <meta name="description" content="A BR LOG® oferece condomínios logísticos com infraestrutura completa para empresas em Dourados e Campo Grande, MS. Lotes de 855 a 2.050 m², segurança 24h e fácil acesso para caminhões." />
+  <meta name="keywords" content="condomínio logístico, Dourados MS, lotes industriais, BR LOG, imóvel logístico, Campo Grande" />
+  <meta property="og:title" content="BR LOG® – Condomínios Logísticos" />
+  <meta property="og:description" content="Onde as empresas moram com qualidade e segurança. Condomínios logísticos no Mato Grosso do Sul." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://brlog.online" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <style>
+    /* ===== VIDEO HERO ===== */
+    .hero--video {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero__video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero__video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero__video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(10,10,10,0.75) 0%,
+        rgba(10,10,10,0.5) 50%,
+        rgba(10,10,10,0.65) 100%
+      );
+    }
+    .hero--video .hero__content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ===== ADS SECTION ===== */
+    .ads-section {
+      background: #0f0f0f;
+      padding: 80px 0;
+    }
+    .ads-section .section-tag { margin-bottom: 12px; }
+    .ads-carousel {
+      margin-top: 48px;
+      position: relative;
+    }
+    .ads-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .ads-tab {
+      padding: 8px 20px;
+      border: 1px solid rgba(141,198,63,0.3);
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      border-radius: 24px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .ads-tab.active,
+    .ads-tab:hover {
+      background: #8DC63F;
+      border-color: #8DC63F;
+      color: #0f0f0f;
+    }
+    .ads-panels { position: relative; }
+    .ads-panel { display: none; }
+    .ads-panel.active { display: block; }
+    .ads-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width: 700px) {
+      .ads-grid { grid-template-columns: 1fr; max-width: 320px; }
+    }
+    .ad-card {
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1a1a1a;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ad-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 36px rgba(141,198,63,0.15);
+    }
+    .ad-card img {
+      width: 100%;
+      display: block;
+    }
+    /* Labels hidden – apenas imagem */
+    .ad-card__label { display: none; }
+
+    /* Garante que imagens dos ADs sempre ficam visíveis */
+    .ad-card img {
+      opacity: 1 !important;
+    }
+
+    /* ===== PRODUCT PAGES – Dourados & Campo Grande ===== */
+    .product-page {
+      padding: 100px 0 80px;
+    }
+    .product-page--dark { background: #111; }
+    .product-page--darker { background: #0d0d0d; }
+
+    .product-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 72px;
+    }
+    @media (max-width: 900px) {
+      .product-hero { grid-template-columns: 1fr; gap: 32px; }
+    }
+    .product-hero__visual {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+    .product-hero__visual img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .product-hero__visual-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(141,198,63,0.4);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #8DC63F;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .product-hero__info { }
+    .product-hero__location {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #8DC63F;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .product-hero__title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(42px, 5vw, 64px);
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .product-hero__desc {
+      color: rgba(255,255,255,0.7);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+    .product-specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+    @media (max-width: 600px) {
+      .product-specs { grid-template-columns: 1fr 1fr; }
+    }
+    .pspec {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .pspec-value {
+      display: block;
+      font-size: 24px;
+      font-weight: 800;
+      color: #8DC63F;
+      margin-bottom: 6px;
+    }
+    .pspec-key {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Product AD Strip */
+    .product-ads-strip {
+      margin-top: 60px;
+      padding-top: 60px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .product-ads-strip h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+    }
+    .product-ads-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    /* ===== SOCIAL – only footer icons ===== */
+    .footer__social {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .footer__social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s ease;
+    }
+    .footer__social a:hover {
+      background: #8DC63F;
+      border-color: #8DC63F;
+      color: #0f0f0f;
+      transform: translateY(-3px);
+    }
+
+    /* Scroll indicator on hero */
+    .hero__scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+    .hero__scroll svg { animation: scrollArrow 1.5s ease-in-out infinite; }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* nav link for product pages */
+    .navbar__nav a[href="#dourados"],
+    .navbar__nav a[href="#campo-grande"] {
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header id="navbar" class="navbar">
+    <div class="container navbar__inner">
+      <a href="#inicio" class="navbar__logo" id="logo-link">
+        <img src="logo.png" alt="BR LOG®" class="navbar__logo-img" height="40" />
+      </a>
+
+      <nav class="navbar__nav" id="main-nav" aria-label="Navegação principal">
+        <a href="#inicio" class="nav-link active" id="nav-inicio">Início</a>
+        <a href="#sobre" class="nav-link" id="nav-sobre">Sobre Nós</a>
+        <a href="#infraestrutura" class="nav-link" id="nav-infra">Infraestrutura</a>
+        <a href="#dourados" class="nav-link" id="nav-dourados">Dourados</a>
+        <a href="#campo-grande" class="nav-link" id="nav-cg">Campo Grande</a>
+        <a href="#expansao" class="nav-link" id="nav-exp">Expansão</a>
+        <a href="#contato" class="nav-link" id="nav-contato">Contato</a>
+      </nav>
+
+      <a href="https://api.whatsapp.com/send?phone=5567999890089&text=Ol%C3%A1,%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20dos%20terrenos%20da%20BR%20LOG"
+         class="btn btn--orange" id="cta-whatsapp-nav" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Fale Conosco
+      </a>
+
+      <button class="navbar__hamburger" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MOBILE DRAWER ===== -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <nav class="mobile-drawer__nav">
+      <a href="#inicio" class="mobile-nav-link" id="m-nav-inicio">Início</a>
+      <a href="#sobre" class="mobile-nav-link" id="m-nav-sobre">Sobre Nós</a>
+      <a href="#infraestrutura" class="mobile-nav-link" id="m-nav-infra">Infraestrutura</a>
+      <a href="#dourados" class="mobile-nav-link" id="m-nav-dourados">Dourados</a>
+      <a href="#campo-grande" class="mobile-nav-link" id="m-nav-cg">Campo Grande</a>
+      <a href="#expansao" class="mobile-nav-link" id="m-nav-exp">Expansão</a>
+      <a href="#contato" class="mobile-nav-link" id="m-nav-contato">Contato</a>
+      <a href="https://api.whatsapp.com/send?phone=5567999890089&text=Ol%C3%A1,%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20dos%20terrenos%20da%20BR%20LOG"
+         class="btn btn--orange mobile-cta" id="m-cta-whatsapp" target="_blank" rel="noopener">
+        WhatsApp
+      </a>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- ===== HERO com VIDEO ===== -->
+    <section id="inicio" class="hero hero--video">
+      <div class="hero__video-wrap">
+        <video autoplay muted loop playsinline preload="auto" id="hero-video">
+          <source src="VIDEO 03.mp4" type="video/mp4" />
+        </video>
+        <div class="hero__video-overlay"></div>
+      </div>
+
+      <div class="container hero__content">
+        <!-- badge removido -->
+
+        <h1 class="hero__title animate-fade-up" id="hero-title">
+          Onde as empresas<br />
+          <span class="gradient-text">moram com qualidade</span><br />
+          e segurança.
+        </h1>
+
+        <p class="hero__subtitle animate-fade-up" id="hero-subtitle">
+          A BR LOG® oferece condomínios logísticos completos — do asfalto dimensionado para caminhões
+          à segurança 24h — para que sua empresa tenha a melhor base de operação.
+        </p>
+
+        <div class="hero__actions animate-fade-up" id="hero-actions">
+          <a href="https://api.whatsapp.com/send?phone=5567999890089&text=Ol%C3%A1,%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20dos%20terrenos%20da%20BR%20LOG"
+             class="btn btn--orange btn--large" id="hero-cta-main" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Entre em Contato
+          </a>
+          <a href="#dourados" class="btn btn--ghost btn--large" id="hero-cta-emp">
+            Ver Empreendimentos
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero__scroll" onclick="document.getElementById('sobre').scrollIntoView({behavior:'smooth'})">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ===== SOBRE ===== -->
+    <section id="sobre" class="section section--dark">
+      <div class="container">
+        <div style="max-width:780px;">
+          <div id="about-text">
+            <div class="section-tag">Sobre a BR LOG®</div>
+            <h2 class="section-title">Um pouco mais sobre<br /><span class="gradient-text">a BR LOG®</span></h2>
+            <p class="body-text">
+              A BR LOG surgiu da necessidade em atender o mercado imobiliário logístico de Dourados,
+              Estado do Mato Grosso do Sul, pois identificamos a carência de imóveis adequados para
+              que as empresas pudessem se instalar.
+            </p>
+            <p class="body-text">
+              Visualizando que esta necessidade não se limita somente à nossa cidade, sintetizamos
+              na nossa marca o DNA de fazer um produto que atenda não só as necessidades locais,
+              mas de todas as empresas do Brasil.
+            </p>
+            <p class="body-text">
+              Assim nasce a marca <strong>BR LOG</strong> — para ser parte da solução em logística
+              que as empresas necessitam. <em>Aonde as empresas moram com qualidade e segurança.</em>
+            </p>
+
+            <div class="about__pillars" id="about-pillars">
+              <div class="pillar" id="pillar-infra">
+                <div class="pillar__icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <div>
+                  <h4>Fácil Acesso</h4>
+                  <p>Vias dimensionadas para tráfego de caminhões</p>
+                </div>
+              </div>
+              <div class="pillar" id="pillar-growth">
+                <div class="pillar__icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </div>
+                <div>
+                  <h4>Plano de Crescimento</h4>
+                  <p>Expansão sólida e estruturada para todo o Brasil</p>
+                </div>
+              </div>
+              <div class="pillar" id="pillar-clients">
+                <div class="pillar__icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                </div>
+                <div>
+                  <h4>Clientes Satisfeitos</h4>
+                  <p>Case de sucesso que validou a expansão da marca</p>
+                </div>
+              </div>
+            </div>
+
+            <a href="https://api.whatsapp.com/send?phone=5567999890089&text=Ol%C3%A1,%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20dos%20terrenos%20da%20BR%20LOG"
+               class="btn btn--orange" id="about-cta" target="_blank" rel="noopener">
+              Saiba Mais
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== INFRAESTRUTURA ===== -->
+    <section id="infraestrutura" class="section section--darker">
+      <div class="container">
+        <div class="section-header centered">
+          <div class="section-tag">Infraestrutura Completa</div>
+          <h2 class="section-title">Tudo o que sua empresa<br /><span class="gradient-text">precisa em um só lugar</span></h2>
+          <p class="section-desc">Do asfalto projetado para caminhões à área gourmet — o Condomínio BR LOG® foi pensado para ser o lar ideal das empresas logísticas.</p>
+        </div>
+
+        <!-- AD 4 – infraestrutura (apenas Feed) -->
+        <div style="max-width:420px; margin:0 auto 48px auto;">
+          <div class="ad-card">
+            <img src="AD 4_BRLog_Feed.png" alt="Infraestrutura BR LOG" style="width:100%; display:block; opacity:1;" />
+          </div>
+        </div>
+
+        <div class="infra-grid" id="infra-grid">
+
+          <div class="infra-card" id="infra-asfalto">
+            <div class="infra-card__img-wrap">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop" alt="Asfalto para caminhões" />
+              <div class="infra-card__overlay">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              </div>
+            </div>
+            <div class="infra-card__body">
+              <h3>Asfalto para Caminhões</h3>
+              <p>Vias projetadas e dimensionadas exclusivamente para o tráfego de caminhões, garantindo segurança e fluidez nas operações.</p>
+            </div>
+          </div>
+
+          <div class="infra-card" id="infra-balanca">
+            <div class="infra-card__img-wrap">
+              <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80&auto=format&fit=crop" alt="Balança de caminhões" />
+              <div class="infra-card__overlay">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 3 L2 7 L12 11 L22 7 Z"/><path d="M2 7 L2 17"/><path d="M22 7 L22 17"/><path d="M2 17 L12 21 L22 17"/><path d="M12 11 L12 21"/></svg>
+              </div>
+            </div>
+            <div class="infra-card__body">
+              <h3>Balança Rodoviária</h3>
+              <p>Balança de pesagem integrada para controle eficiente das cargas, facilitando a operação logística do dia a dia.</p>
+            </div>
+          </div>
+
+          <div class="infra-card" id="infra-admin">
+            <div class="infra-card__img-wrap">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&auto=format&fit=crop" alt="Área administrativa / Coworking" />
+              <div class="infra-card__overlay">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+              </div>
+            </div>
+            <div class="infra-card__body">
+              <h3>Coworking & Auditório</h3>
+              <p>Espaço de coworking e auditório para reuniões, gestão e suporte às empresas do condomínio.</p>
+            </div>
+          </div>
+
+          <div class="infra-card" id="infra-gourmet">
+            <div class="infra-card__img-wrap">
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80&auto=format&fit=crop" alt="Área gourmet" />
+              <div class="infra-card__overlay">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+              </div>
+            </div>
+            <div class="infra-card__body">
+              <h3>Espaço Gourmet</h3>
+              <p>Área de convivência e alimentação para os colaboradores e parceiros das empresas instaladas no condomínio.</p>
+            </div>
+          </div>
+
+          <div class="infra-card" id="infra-futebol">
+            <div class="infra-card__img-wrap">
+              <img src="https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=600&q=80&auto=format&fit=crop" alt="Campo de futebol" />
+              <div class="infra-card__overlay">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/></svg>
+              </div>
+            </div>
+            <div class="infra-card__body">
+              <h3>Campo de Futebol</h3>
+              <p>Área de lazer com campo de futebol para promover qualidade de vida e integração entre os colaboradores.</p>
+            </div>
+          </div>
+
+          <div class="infra-card" id="infra-seguranca">
+            <div class="infra-card__img-wrap">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop" alt="Guarita e segurança" />
+              <div class="infra-card__overlay">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+            </div>
+            <div class="infra-card__body">
+              <h3>Portaria & Segurança 24h</h3>
+              <p>Portaria com vigilância 24 horas por dia, 7 dias por semana, garantindo total tranquilidade para as operações.</p>
+            </div>
+          </div>
+
+          <div class="infra-card" id="infra-heliporto">
+            <div class="infra-card__img-wrap">
+              <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?w=600&q=80&auto=format&fit=crop" alt="Heliponto" />
+              <div class="infra-card__overlay">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+            </div>
+            <div class="infra-card__body">
+              <h3>Heliponto</h3>
+              <p>Área exclusiva para pouso de helicópteros, facilitando deslocamentos executivos e operacionais de alto nível.</p>
+            </div>
+          </div>
+
+          <div class="infra-card" id="infra-estacionamento">
+            <div class="infra-card__img-wrap">
+              <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=600&q=80&auto=format&fit=crop" alt="Estacionamento caminhões" />
+              <div class="infra-card__overlay">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              </div>
+            </div>
+            <div class="infra-card__body">
+              <h3>Estacionamento para Caminhões</h3>
+              <p>Área ampla de estacionamento projetada para receber caminhões de todos os portes, com manobra segura e eficiente.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRODUTO: DOURADOS ===== -->
+    <section id="dourados" class="product-page product-page--dark">
+      <div class="container">
+        <div class="section-header centered" style="margin-bottom:56px;">
+          <div class="section-tag">1º Empreendimento – Case de Sucesso</div>
+          <h2 class="section-title">BR LOG® <span class="gradient-text">Dourados</span></h2>
+          <p class="section-desc">O primeiro condomínio logístico da marca, sucesso de vendas e aceitação de mercado em Dourados, MS.</p>
+        </div>
+
+        <div class="product-hero" style="grid-template-columns: 1fr; max-width: 800px; margin: 0 auto; text-align: center;">
+
+          <div class="product-hero__info" style="display: flex; flex-direction: column; align-items: center;">
+            <div class="product-hero__location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Dourados, Mato Grosso do Sul
+            </div>
+            <h3 class="product-hero__title">BR LOG®<br/>Dourados – MS</h3>
+            <p class="product-hero__desc">
+              O Condomínio BR LOG® Dourados foi o primeiro projeto desenvolvido da marca e foi
+              <strong>sucesso de vendas e aceitação de mercado</strong>, fazendo com que este
+              CASE de sucesso validasse a marca para expandir para outros locais.
+            </p>
+            <div class="product-specs">
+              <div class="pspec">
+                <span class="pspec-value">193</span>
+                <span class="pspec-key">Lotes totais</span>
+              </div>
+              <div class="pspec">
+                <span class="pspec-value">855 m²</span>
+                <span class="pspec-key">Área mínima</span>
+              </div>
+              <div class="pspec">
+                <span class="pspec-value">2.050 m²</span>
+                <span class="pspec-key">Área máxima</span>
+              </div>
+            </div>
+            <a href="https://api.whatsapp.com/send?phone=5567999890089&text=Ol%C3%A1,%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20Condom%C3%ADnio%20BR%20LOG%20Dourados"
+               class="btn btn--orange btn--large" id="dourados-cta" target="_blank" rel="noopener">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Solicitar Informações
+            </a>
+          </div>
+        </div>
+
+        <!-- Dourados – Conteúdo visual em destaque (aguardando imagens do usuário) -->
+        <div class="product-ads-strip" id="dourados-media">
+          <h3>📸 Galeria de Imagens – Em breve</h3>
+          <p style="color:rgba(255,255,255,0.4); font-size:14px; margin-bottom:0;">
+            As imagens e vídeos do BR LOG® Dourados serão adicionados aqui quando enviados.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRODUTO: CAMPO GRANDE ===== -->
+    <section id="campo-grande" class="product-page product-page--darker">
+      <div class="container">
+        <div class="section-header centered" style="margin-bottom:56px;">
+          <div class="section-tag">
+            <span class="pulse-dot"></span>
+            Lançamento Oficial
+          </div>
+          <h2 class="section-title">BR LOG® <span class="gradient-text">Campo Grande</span></h2>
+          <p class="section-desc">O segundo grande empreendimento da BR LOG® chega à capital do Mato Grosso do Sul, na BR-262.</p>
+        </div>
+
+        <div class="product-hero">
+          <div class="product-hero__info">
+            <div class="product-hero__location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Campo Grande, Mato Grosso do Sul
+            </div>
+            <h3 class="product-hero__title">BR LOG®<br/>Campo Grande – MS</h3>
+            <p class="product-hero__desc">
+              Localizado na <strong>BR-262</strong>, eixo da Rota Bioceânica e da Rota da Celulose,
+              conectando o Brasil ao Pacífico. O endereço mais estratégico de Campo Grande para
+              sua empresa operar com <strong>+ Estrutura, + Produtividade e + Valorização</strong>.
+            </p>
+            <div class="product-specs">
+              <div class="pspec">
+                <span class="pspec-value">BR-262</span>
+                <span class="pspec-key">Rodovia</span>
+              </div>
+              <div class="pspec">
+                <span class="pspec-value">7 km</span>
+                <span class="pspec-key">Entrada da cidade</span>
+              </div>
+              <div class="pspec">
+                <span class="pspec-value">24h</span>
+                <span class="pspec-key">Portaria</span>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <a href="https://api.whatsapp.com/send?phone=5567999890089&text=Ol%C3%A1,%20tenho%20interesse%20no%20lan%C3%A7amento%20BR%20LOG%20Campo%20Grande"
+                 class="btn btn--green btn--large" id="cg-cta-main" target="_blank" rel="noopener">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Tenho Interesse
+              </a>
+              <a href="https://brlogcampogrande.com.br/" class="btn btn--ghost btn--large" id="cg-site-btn" target="_blank" rel="noopener">
+                Site Oficial
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="product-hero__visual">
+            <img
+              src="campo-grande-render.jpg"
+              alt="Visualização aérea 3D do Condomínio BR LOG Campo Grande MS"
+              loading="lazy"
+            />
+            <div class="product-hero__visual-badge">
+              <span class="pulse-dot"></span>
+              Lançamento – Campo Grande, MS
+            </div>
+          </div>
+        </div>
+
+        <!-- ADs do Campo Grande -->
+        <div class="product-ads-strip">
+          <h3>📣 Campanhas & Materiais</h3>
+          <div class="ads-tabs" id="cg-ads-tabs">
+            <button class="ads-tab active" onclick="switchCGTab('localiz', this)" id="tab-cg-loc">Localização</button>
+            <button class="ads-tab" onclick="switchCGTab('invest', this)" id="tab-cg-inv">Investimento</button>
+            <button class="ads-tab" onclick="switchCGTab('rota', this)" id="tab-cg-rota">Rota Bioceânica</button>
+            <button class="ads-tab" onclick="switchCGTab('segur', this)" id="tab-cg-seg">Segurança</button>
+          </div>
+
+          <div id="cg-panel-localiz" class="ads-panel active">
+            <div style="max-width:420px; margin:0 auto;">
+              <div class="ad-card">
+                <img src="AD 1_BRLog_Feed.png" alt="AD1 - Localização Campo Grande" style="width:100%; display:block; opacity:1;" />
+              </div>
+            </div>
+          </div>
+
+          <div id="cg-panel-invest" class="ads-panel">
+            <div style="max-width:420px; margin:0 auto;">
+              <div class="ad-card">
+                <img src="AD 2_BRLog_Feed.png" alt="AD2 - Investimento Campo Grande" style="width:100%; display:block; opacity:1;" />
+              </div>
+            </div>
+          </div>
+
+          <div id="cg-panel-rota" class="ads-panel">
+            <div style="max-width:420px; margin:0 auto;">
+              <div class="ad-card">
+                <img src="AD 3_BRLog_Story.png" alt="AD3 - Rota Bioceânica" style="width:100%; display:block; opacity:1;" />
+              </div>
+            </div>
+          </div>
+
+          <div id="cg-panel-segur" class="ads-panel">
+            <div style="max-width:420px; margin:0 auto;">
+              <div class="ad-card">
+                <img src="AD 5_BRLog_Feed.png" alt="AD5 - Segurança Campo Grande" style="width:100%; display:block; opacity:1;" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Galeria de imagens/vídeos (aguardando envio do usuário) -->
+        <div style="margin-top:60px; padding-top:60px; border-top:1px solid rgba(255,255,255,0.06);" id="cg-gallery">
+          <h3 style="font-family:'Inter',sans-serif; font-size:14px; font-weight:700; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:2px; margin-bottom:28px;">
+            📸 Galeria de Imagens & Vídeos – Em breve
+          </h3>
+          <p style="color:rgba(255,255,255,0.4); font-size:14px;">
+            As imagens e vídeos em destaque do BR LOG® Campo Grande serão adicionados aqui quando enviados.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ===== EXPANSÃO ===== -->
+    <section id="expansao" class="section section--green-accent">
+      <div class="container">
+        <div style="max-width:800px; margin:0 auto; text-align:center;">
+          <div class="section-tag section-tag--light">Plano de Expansão</div>
+          <h2 class="section-title">A BR LOG® em todo<br /><span class="gradient-text">o Brasil</span></h2>
+          <p class="body-text">
+            Nosso plano de expansão é fundamentado em uma <strong>expansão radial, sólida e muito estruturada</strong>,
+            para atingirmos o objetivo que é um VGV robusto em até 5 anos.
+          </p>
+          <p class="body-text">
+            Buscamos áreas para parceria ou compra em regiões com potencial de lançamento, com preferência
+            nos estados próximos às áreas onde já atuamos: <strong>MT, PR e SP</strong>.
+          </p>
+
+          <div class="expand__modes" id="expand-modes" style="margin-top:40px; text-align:left;">
+            <div class="mode-card" id="mode-area">
+              <div class="mode-card__icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <h4>Área de Expansão</h4>
+                <p>Preferencialmente em estados próximos às áreas onde já atuamos: MT, PR e SP.</p>
+              </div>
+            </div>
+            <div class="mode-card" id="mode-partnership">
+              <div class="mode-card__icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              </div>
+              <div>
+                <h4>Compra ou Parceria</h4>
+                <p>Apresentamos a melhor forma de parceria com você, terrenista. Negocie sua área conosco.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="expand__actions" id="expand-actions" style="margin-top:40px; justify-content:center;">
+            <a href="https://api.whatsapp.com/send?phone=5567999890089&text=Ol%C3%A1,%20tenho%20interesse%20em%20negociar%20minha%20%C3%A1rea%20com%20a%20BR%20LOG"
+               class="btn btn--orange" id="expand-cta-land" target="_blank" rel="noopener">
+              Negocie Sua Área
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=5567999890089&text=Ol%C3%A1,%20gostaria%20de%20saber%20mais%20sobre%20o%20plano%20de%20expans%C3%A3o%20da%20BR%20LOG"
+               class="btn btn--ghost" id="expand-cta-more" target="_blank" rel="noopener">
+              Saiba Mais
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTATO ===== -->
+    <section id="contato" class="section section--darker">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact__info" id="contact-info">
+            <div class="section-tag">Entre em Contato</div>
+            <h2 class="section-title">Fale com a<br /><span class="gradient-text">BR LOG®</span></h2>
+            <p class="body-text">Entre em contato através de nossos canais para saber mais sobre lotes disponíveis, parcerias ou nosso plano de expansão.</p>
+
+            <div class="contact__details" id="contact-details">
+              <div class="contact-item" id="contact-address">
+                <div class="contact-item__icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <strong>Endereço</strong>
+                  <p>Rua Antônio de Carvalho, 1895<br />Vila Planalto, Dourados – MS<br />CEP 79.826-030</p>
+                </div>
+              </div>
+
+              <div class="contact-item" id="contact-phone">
+                <div class="contact-item__icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                </div>
+                <div>
+                  <strong>Telefone</strong>
+                  <a href="tel:+5567999890089">+55 67 99989-0089</a>
+                </div>
+              </div>
+
+              <div class="contact-item" id="contact-email">
+                <div class="contact-item__icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div>
+                  <strong>E-mail</strong>
+                  <a href="mailto:brlogparticipacoes@gmail.com">brlogparticipacoes@gmail.com</a>
+                </div>
+              </div>
+            </div>
+
+            <a href="https://api.whatsapp.com/send?phone=5567999890089&text=Ol%C3%A1,%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20dos%20terrenos%20da%20BR%20LOG"
+               class="btn btn--orange btn--large" id="contact-whatsapp-btn" target="_blank" rel="noopener">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Conversar no WhatsApp
+            </a>
+          </div>
+
+          <div class="contact__form-wrap" id="contact-form-wrap">
+            <form class="contact-form" id="contact-form" novalidate>
+              <h3>Envie uma mensagem</h3>
+              <div class="form-group" id="form-group-name">
+                <label for="name">Nome completo</label>
+                <input type="text" id="name" name="name" placeholder="Seu nome" required autocomplete="name" />
+              </div>
+              <div class="form-group" id="form-group-empresa">
+                <label for="empresa">Empresa</label>
+                <input type="text" id="empresa" name="empresa" placeholder="Nome da sua empresa" />
+              </div>
+              <div class="form-group" id="form-group-phone">
+                <label for="phone">Telefone / WhatsApp</label>
+                <input type="tel" id="phone" name="phone" placeholder="+55 (67) 99999-9999" required autocomplete="tel" />
+              </div>
+              <div class="form-group" id="form-group-interest">
+                <label for="interest">Interesse</label>
+                <select id="interest" name="interest">
+                  <option value="">Selecione seu interesse</option>
+                  <option value="lote">Adquirir um lote em Dourados</option>
+                  <option value="campo-grande">Lote em Campo Grande</option>
+                  <option value="parceria">Parceria / Vender minha área</option>
+                  <option value="expansao">Expansão para outro estado</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+              <div class="form-group" id="form-group-msg">
+                <label for="message">Mensagem</label>
+                <textarea id="message" name="message" rows="4" placeholder="Como podemos ajudar?"></textarea>
+              </div>
+              <button type="submit" class="btn btn--orange btn--full" id="form-submit-btn">
+                Enviar Mensagem
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+              <p class="form-note" id="form-note">Ao enviar, você será redirecionado ao nosso WhatsApp.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand" id="footer-brand">
+          <a href="#inicio" class="navbar__logo">
+            <img src="logo.png" alt="BR LOG®" class="navbar__logo-img footer-logo" height="34" />
+          </a>
+          <p>Condomínios logísticos completos para empresas que demandam qualidade, segurança e infraestrutura de excelência.</p>
+          <!-- Apenas ícones das redes sociais, sem seção separada -->
+          <div class="footer__social" id="footer-social">
+            <a href="https://www.instagram.com/brlog.online/" target="_blank" rel="noopener" aria-label="Instagram" id="footer-ig">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61559932693706" target="_blank" rel="noopener" aria-label="Facebook" id="footer-fb">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://youtube.com/@brlog.online" target="_blank" rel="noopener" aria-label="YouTube" id="footer-yt">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/br-log-online-025b2230b" target="_blank" rel="noopener" aria-label="LinkedIn" id="footer-li">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@brlog.online" target="_blank" rel="noopener" aria-label="TikTok" id="footer-tt">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=5567999890089" target="_blank" rel="noopener" aria-label="WhatsApp" id="footer-wa">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__links" id="footer-links">
+          <div class="footer__col" id="footer-nav-col">
+            <h5>Navegação</h5>
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre Nós</a>
+            <a href="#infraestrutura">Infraestrutura</a>
+            <a href="#dourados">BR LOG Dourados</a>
+            <a href="#campo-grande">BR LOG Campo Grande</a>
+            <a href="#expansao">Plano de Expansão</a>
+            <a href="#contato">Contato</a>
+          </div>
+          <div class="footer__col" id="footer-emp-col">
+            <h5>Empreendimentos</h5>
+            <a href="#dourados">BR LOG® Dourados – MS</a>
+            <a href="#campo-grande">BR LOG® Campo Grande – MS</a>
+            <a href="#expansao">Expansão para MT, PR e SP</a>
+          </div>
+          <div class="footer__col" id="footer-contact-col">
+            <h5>Contato</h5>
+            <a href="https://api.whatsapp.com/send?phone=5567999890089&text=Ol%C3%A1" target="_blank" rel="noopener">+55 67 99989-0089</a>
+            <a href="mailto:brlogparticipacoes@gmail.com">brlogparticipacoes@gmail.com</a>
+            <span>Rua Antônio de Carvalho, 1895</span>
+            <span>Vila Planalto, Dourados – MS</span>
+            <span>CEP 79.826-030</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom" id="footer-bottom">
+        <p>© 2024 BR LOG LTDA. Todos os direitos reservados.</p>
+        <p class="footer__legal">O plágio é considerado crime — Lei nº 9.610/98.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp FAB -->
+  <a href="https://api.whatsapp.com/send?phone=5567999890089&text=Ol%C3%A1,%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20dos%20terrenos%20da%20BR%20LOG"
+     class="whatsapp-fab" id="whatsapp-fab" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <span class="fab-tooltip">Fale conosco!</span>
+  </a>
+
+  <script>
+    // Tabs para os ADs de Campo Grande
+    function switchCGTab(panelKey, btn) {
+      // panels
+      document.querySelectorAll('#campo-grande .ads-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('cg-panel-' + panelKey).classList.add('active');
+      // tabs
+      document.querySelectorAll('#cg-ads-tabs .ads-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
