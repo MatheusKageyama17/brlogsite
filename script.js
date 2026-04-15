@@ -79,30 +79,25 @@
     heroTitle.style.transform = 'none';
     heroTitle.style.filter = 'none';
     
+    const textRaw1 = "Onde as empresas";
+    const textRaw2 = "moram com qualidade";
+    const textRaw3 = "e segurança.";
+    
     let charIndex = 0;
-    const splitTextNodes = (node) => {
-      if (node.nodeType === 3) { // Text node
-        const chars = node.nodeValue.split('');
-        const fragment = document.createDocumentFragment();
-        chars.forEach(char => {
-          if (char === ' ' || char === '\n') {
-            fragment.appendChild(document.createTextNode(char));
-          } else {
-            const span = document.createElement('span');
-            span.className = 'anim-char';
-            span.textContent = char;
-            // base delay + stagger effect
-            span.style.animationDelay = `${0.3 + charIndex * 0.025}s`;
-            fragment.appendChild(span);
-            charIndex++;
-          }
-        });
-        node.replaceWith(fragment);
-      } else if (node.nodeType === 1 && node.nodeName !== 'BR') {
-        Array.from(node.childNodes).forEach(child => splitTextNodes(child));
-      }
-    };
-    Array.from(heroTitle.childNodes).forEach(child => splitTextNodes(child));
+    function createSpans(text) {
+      return text.split(' ').map(word => {
+        const chars = word.split('').map(char => {
+          const delay = 0.2 + (charIndex++ * 0.025);
+          return `<span class="anim-char" style="animation-delay:${delay}s">${char}</span>`;
+        }).join('');
+        charIndex++; // account for space delay
+        return `<span style="white-space: nowrap;">${chars}</span>`;
+      }).join(' ');
+    }
+
+    heroTitle.innerHTML = createSpans(textRaw1) + '<br />' + 
+                          '<span class="gradient-text" style="display:inline-block;">' + createSpans(textRaw2) + '</span><br />' + 
+                          createSpans(textRaw3);
   }
 
   // ---- Smooth scroll for anchor links ----
